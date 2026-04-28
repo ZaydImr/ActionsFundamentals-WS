@@ -8,6 +8,7 @@ on:
 
 jobs:
   hello:
+    if: github.actor == 'MrKeithM'
     runs-on: ubuntu-latest
 
     steps:
