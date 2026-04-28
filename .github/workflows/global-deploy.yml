@@ -1,0 +1,33 @@
+name: Global Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: environment
+        description: 'Envirnment to deploy to'
+jobs:
+ dev-deploy:
+    environment: Development
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to the server
+        run: echo Hello, world for dev!
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          FE_URL: ${{  vars.FE_URL }}
+ prod-deploy:
+    needs: dev-deploy
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to the server
+        run: echo Hello, world for dev!
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          FE_URL: ${{  vars.FE_URL }}
