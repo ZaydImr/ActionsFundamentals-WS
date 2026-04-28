@@ -2,7 +2,11 @@ name: Deploy to Development
 
 on:
   workflow_dispatch:
-
+    inputs:
+      environment:
+        required: true
+        type: environment
+        description: 'Envirnment to deploy to'
 jobs:
   deploy:
     environment: 
