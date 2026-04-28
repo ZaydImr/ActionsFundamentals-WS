@@ -1,0 +1,10 @@
+name: Call Reusable Workflow
+
+on: 
+  push:
+
+jobs:
+  call:
+    uses: ./.github/workflows/reusable-workflow.yml
+    with: 
+      my-input: "Hello World!"
