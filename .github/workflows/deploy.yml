@@ -8,15 +8,27 @@ on:
         type: environment
         description: 'Envirnment to deploy to'
 jobs:
-  deploy:
-    environment: 
-      Development
+ dev-deploy:
+    if: github.event.inputs.environment == 'Development'
+    environment: Development
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Deploy to the server
-        run: echo Hello, world!
+        run: echo Hello, world for dev!
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          FE_URL: ${{  vars.FE_URL }}
+ prod-deploy:
+    if: github.event.inputs.environment == 'Production'
+    environment: Production
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to the server
+        run: echo Hello, world for dev!
         env:
           API_KEY: ${{ secrets.API_KEY }}
           FE_URL: ${{  vars.FE_URL }}
