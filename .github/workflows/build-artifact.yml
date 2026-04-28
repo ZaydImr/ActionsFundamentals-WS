@@ -17,6 +17,9 @@ jobs:
           echo "Your Application Subscription : $SUBSCRIPTION" >> output.txt
         env:
           SUBSCRIPTION:  ${{ github.event.inputs.subsrciption }}
+      - name: updating the file
+        run: |
+          echo "All your parameters : \n ${{ github.event.inputs }}" >> output.txt
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v7.0.1
         with:
