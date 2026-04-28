@@ -1,0 +1,26 @@
+name: Build artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      subsrciption:
+        required: true
+        type: string
+        description: Applicaiton Subscription
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Creating the file
+        run: |
+          echo "Your Application Subscription : $SUBSCRIPTION" >> output.txt
+        env:
+          SUBSCRIPTION:  ${{ github.event.inputs.subsrciption }}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          path: ./output.txt
+          retention-days: 7
+          archive: false
+    
