@@ -1,0 +1,13 @@
+name: Testing our Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-action:
+    runs-on: ubuntu-slim
+    steps:
+      - name: Greeting
+        uses: Zaydimr/my-composite-action@v1
+        with:
+          name: ${{ github.actor }}
